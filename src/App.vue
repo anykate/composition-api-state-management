@@ -18,8 +18,8 @@ const isLoggedIn = getIsLoggedIn()
         <h1>
             State Management using Vue3 Composition API (without VueX / Pinia)
         </h1>
-        <user-login />
-        <user-profile v-if="isLoggedIn" />
+        <user-login v-if="!isLoggedIn" />
+        <user-profile v-else />
         <movie-list />
         Number of Movies: {{ numberOfMovies }}
     </div>

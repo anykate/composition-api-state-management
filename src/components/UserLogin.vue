@@ -3,7 +3,9 @@ import { login } from '@/assets/js/api'
 import useUserState from '@/store/useUserState'
 import { reactive } from 'vue'
 
-const { updateUserData } = useUserState()
+const { updateUserData, updateLoading, getIsLoading } = useUserState()
+
+const loadingState = getIsLoading()
 
 const userForm = reactive({
     firstName: '',
@@ -13,7 +15,11 @@ const userForm = reactive({
 })
 
 const onSubmitForm = () => {
-    login(userForm).then((data) => updateUserData(data))
+    updateLoading(true)
+
+    login(userForm)
+        .then((data) => updateUserData(data))
+        .finally(() => updateLoading(false))
 
     userForm.firstName = ''
     userForm.lastName = ''
@@ -36,6 +42,7 @@ const onSubmitForm = () => {
                     id="fname"
                     v-model="userForm.firstName"
                     placeholder="Enter your First Name here..."
+                    required
                 />
             </div>
             <div class="form-group">
@@ -47,6 +54,7 @@ const onSubmitForm = () => {
                     id="lname"
                     v-model="userForm.lastName"
                     placeholder="Enter your Last Name here..."
+                    required
                 />
             </div>
             <div class="form-group">
@@ -58,6 +66,7 @@ const onSubmitForm = () => {
                     id="email"
                     v-model="userForm.email"
                     placeholder="Enter your Email here..."
+                    required
                 />
             </div>
             <div class="form-group">
@@ -69,13 +78,15 @@ const onSubmitForm = () => {
                     id="password"
                     v-model="userForm.password"
                     placeholder="Enter your Password here..."
+                    required
                 />
             </div>
             <button
                 type="submit"
                 class="btnSubmit"
+                :disabled="loadingState"
             >
-                Submit
+                {{ loadingState ? 'Loading...' : 'Submit' }}
             </button>
         </form>
     </div>
@@ -99,5 +110,6 @@ input {
 .btnSubmit {
     margin: 15px 0;
     width: fit-content;
+    padding: 8px;
 }
 </style>

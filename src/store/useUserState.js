@@ -8,6 +8,7 @@ const defaultState = {
         password: '',
     },
     isLoggedIn: false,
+    loading: false,
 }
 
 const state = reactive(defaultState)
@@ -21,6 +22,10 @@ const getters = {
 
     getIsLoggedIn: () => {
         return computed(() => state.isLoggedIn)
+    },
+
+    getIsLoading: () => {
+        return computed(() => state.loading)
     },
 }
 
@@ -36,6 +41,10 @@ const actions = {
 
     updateIsLoggedIn: async (isLoggedIn) => {
         state.isLoggedIn = await isLoggedIn
+    },
+
+    updateLoading: async (loadingStatus) => {
+        state.loading = await loadingStatus
     },
 }
 
