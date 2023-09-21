@@ -6,6 +6,8 @@ import { reactive } from 'vue'
 const { updateUserData } = useUserState()
 
 const userForm = reactive({
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
 })
@@ -13,6 +15,8 @@ const userForm = reactive({
 const onSubmitForm = () => {
     login(userForm).then((data) => updateUserData(data))
 
+    userForm.firstName = ''
+    userForm.lastName = ''
     userForm.email = ''
     userForm.password = ''
 }
@@ -24,10 +28,33 @@ const onSubmitForm = () => {
             id="myForm"
         >
             <div class="form-group">
+                <label for="fname">First Name: </label>
+                <input
+                    type="text"
+                    name="first_name"
+                    autocomplete="off"
+                    id="fname"
+                    v-model="userForm.firstName"
+                    placeholder="Enter your First Name here..."
+                />
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name: </label>
+                <input
+                    type="text"
+                    name="last_name"
+                    autocomplete="off"
+                    id="lname"
+                    v-model="userForm.lastName"
+                    placeholder="Enter your Last Name here..."
+                />
+            </div>
+            <div class="form-group">
                 <label for="email">Email: </label>
                 <input
                     type="email"
                     name="email"
+                    autocomplete="off"
                     id="email"
                     v-model="userForm.email"
                     placeholder="Enter your Email here..."
@@ -38,6 +65,7 @@ const onSubmitForm = () => {
                 <input
                     type="password"
                     name="password"
+                    autocomplete="off"
                     id="password"
                     v-model="userForm.password"
                     placeholder="Enter your Password here..."
@@ -54,17 +82,22 @@ const onSubmitForm = () => {
 </template>
 <style scoped>
 #myForm {
-    display: inline-block;
+    display: flex;
+    max-width: 30rem;
+    align-items: space-between;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
 }
-input[type='email'],
-input[type='password'] {
+input {
     width: 20rem;
-    margin: 4px 0;
 }
-.form-group input[type='email'] {
-    margin-left: 31px;
+.form-group {
+    display: flex;
+    justify-content: space-between;
 }
 .btnSubmit {
     margin: 15px 0;
+    width: fit-content;
 }
 </style>
