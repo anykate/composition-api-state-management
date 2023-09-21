@@ -25,7 +25,11 @@ const getters = {
     },
 }
 
-const actions = {}
+const actions = {
+    addMovie: async (newMovie) => {
+        state.movies.push(await newMovie)
+    },
+}
 
 export default () => ({
     state: readonly(state),
