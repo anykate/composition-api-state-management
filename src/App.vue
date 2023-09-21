@@ -1,11 +1,8 @@
 <script setup>
 import MovieList from '@/components/MovieList.vue'
 import useMovieState from '@/store/useMovieState'
-import { computed } from 'vue'
-const { state: movieState } = useMovieState()
-const numberOfMovies = computed(() => {
-    return movieState.movies.length
-})
+const { getNumberOfMovies } = useMovieState()
+const numberOfMovies = getNumberOfMovies()
 </script>
 
 <template>

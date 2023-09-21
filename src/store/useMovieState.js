@@ -1,4 +1,4 @@
-import { reactive, readonly } from 'vue'
+import { computed, reactive, readonly } from 'vue'
 
 const defaultState = {
     movies: [
@@ -19,7 +19,11 @@ const defaultState = {
 
 const state = reactive(defaultState)
 
-const getters = {}
+const getters = {
+    getNumberOfMovies: () => {
+        return computed(() => state.movies?.length)
+    },
+}
 const actions = {}
 
 export default () => ({
