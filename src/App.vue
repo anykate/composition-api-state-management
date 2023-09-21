@@ -6,11 +6,16 @@ const numberOfMovies = getNumberOfMovies()
 </script>
 
 <template>
-    <div>
+    <div class="container">
         <h1>Hello World</h1>
         <movie-list />
         Number of Movies: {{ numberOfMovies }}
     </div>
 </template>
 
-<style scoped></style>
+<style>
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+</style>
