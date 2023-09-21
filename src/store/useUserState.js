@@ -1,4 +1,6 @@
-import { computed, reactive, readonly } from 'vue'
+import { computed, reactive, readonly, watch } from 'vue'
+
+const STATE_NAME = 'userState'
 
 const defaultState = {
     userData: {
@@ -11,7 +13,15 @@ const defaultState = {
     loading: false,
 }
 
-const state = reactive(defaultState)
+const getDefaultState = () => {
+    if (localStorage.getItem(STATE_NAME) !== null) {
+        return JSON.parse(localStorage.getItem(STATE_NAME))
+    }
+
+    return defaultState
+}
+
+const state = reactive(getDefaultState())
 
 const getters = {
     getFullName: () => {
@@ -41,6 +51,15 @@ const actions = {
 
     updateIsLoggedIn: async (isLoggedIn) => {
         state.isLoggedIn = await isLoggedIn
+
+        if (isLoggedIn === false) {
+            state.userData.firstName = ''
+            state.userData.lastName = ''
+            state.userData.email = ''
+            state.userData.password = ''
+
+            localStorage.removeItem(STATE_NAME)
+        }
     },
 
     updateLoading: async (loadingStatus) => {
@@ -48,8 +67,22 @@ const actions = {
     },
 }
 
-export default () => ({
-    state: readonly(state),
-    ...getters,
-    ...actions,
-})
+watch(
+    () => state,
+    () => {
+        localStorage.setItem(STATE_NAME, JSON.stringify(state))
+    },
+    { deep: true }
+)
+
+export default () => {
+    if (localStorage.getItem(STATE_NAME) === null) {
+        localStorage.setItem(STATE_NAME, JSON.stringify(state))
+    }
+
+    return {
+        state: readonly(state),
+        ...getters,
+        ...actions,
+    }
+}
