@@ -15,7 +15,9 @@ const isLoggedIn = getIsLoggedIn()
 
 <template>
     <div class="container">
-        <h1>Hello World</h1>
+        <h1>
+            State Management using Vue3 Composition API (without VueX / Pinia)
+        </h1>
         <user-login />
         <user-profile v-if="isLoggedIn" />
         <movie-list />
