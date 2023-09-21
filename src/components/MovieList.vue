@@ -16,13 +16,21 @@ const onAddMovieClick = () => {
 </script>
 
 <template>
-    <div>
-        <ul>
+    <div class="movieList">
+        <ul class="movies">
             <li
                 v-for="movie of movieState.movies"
                 :key="movie.id"
             >
-                {{ movie.title }}
+                <div class="row">
+                    {{ movie.title }}
+                    <button
+                        type="submit"
+                        class="delBtn"
+                    >
+                        x
+                    </button>
+                </div>
             </li>
         </ul>
         <button
@@ -37,9 +45,31 @@ const onAddMovieClick = () => {
 </template>
 
 <style scoped>
+ul {
+    list-style: square;
+}
+.movieList {
+    margin-bottom: 4rem;
+}
 .btnSubmit {
     margin: 15px 0;
     width: fit-content;
     padding: 8px;
+}
+.movies {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+.row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+.delBtn {
+    padding: 2px 8px;
+    cursor: pointer;
 }
 </style>
