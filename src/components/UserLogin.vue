@@ -1,11 +1,12 @@
 <script setup>
+import { login } from '@/assets/js/api'
 import { ref } from 'vue'
 const userForm = ref({
     email: '',
     password: '',
 })
 const onSubmitForm = () => {
-    console.log(userForm.value)
+    login().then((data) => console.log(data))
 }
 </script>
 <template>
