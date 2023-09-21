@@ -57,8 +57,6 @@ const actions = {
             state.userData.lastName = ''
             state.userData.email = ''
             state.userData.password = ''
-
-            localStorage.removeItem(STATE_NAME)
         }
     },
 
@@ -81,6 +79,7 @@ export default () => {
     }
 
     return {
+        STATE_NAME,
         state: readonly(state),
         ...getters,
         ...actions,

@@ -1,8 +1,13 @@
 <script setup>
 import useUserState from '@/store/useUserState'
+import { onUnmounted } from 'vue'
 
-const { getFullName, updateIsLoggedIn } = useUserState()
+const { getFullName, updateIsLoggedIn, STATE_NAME } = useUserState()
 const fullName = getFullName()
+
+onUnmounted(() => {
+    localStorage.removeItem(STATE_NAME)
+})
 </script>
 
 <template>
