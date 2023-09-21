@@ -24,6 +24,7 @@ const getters = {
         return computed(() => state.movies?.length)
     },
 }
+
 const actions = {}
 
 export default () => ({

@@ -1,12 +1,20 @@
 <script setup>
 import { login } from '@/assets/js/api'
-import { ref } from 'vue'
-const userForm = ref({
+import useUserState from '@/store/useUserState'
+import { reactive } from 'vue'
+
+const { updateUserData } = useUserState()
+
+const userForm = reactive({
     email: '',
     password: '',
 })
+
 const onSubmitForm = () => {
-    login().then((data) => console.log(data))
+    login(userForm).then((data) => updateUserData(data))
+
+    userForm.email = ''
+    userForm.password = ''
 }
 </script>
 <template>

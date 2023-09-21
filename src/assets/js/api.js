@@ -1,9 +1,9 @@
-export const login = async () =>
+export const login = async ({ email, password }) =>
     await new Promise((resolve) => {
         setTimeout(() => {
             resolve({
-                firstName: 'John',
-                lastName: 'Doe',
+                email: email,
+                password: password,
             })
         }, 3000)
     })
