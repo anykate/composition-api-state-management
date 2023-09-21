@@ -1,15 +1,23 @@
 <script setup>
 import MovieList from '@/components/MovieList.vue'
 import UserLogin from '@/components/UserLogin.vue'
+import UserProfile from '@/components/UserProfile.vue'
+
 import useMovieState from '@/store/useMovieState'
+import useUserState from '@/store/useUserState'
+
 const { getNumberOfMovies } = useMovieState()
 const numberOfMovies = getNumberOfMovies()
+
+const { getIsLoggedIn } = useUserState()
+const isLoggedIn = getIsLoggedIn()
 </script>
 
 <template>
     <div class="container">
         <h1>Hello World</h1>
         <user-login />
+        <user-profile v-if="isLoggedIn" />
         <movie-list />
         Number of Movies: {{ numberOfMovies }}
     </div>
