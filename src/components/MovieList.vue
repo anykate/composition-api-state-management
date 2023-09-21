@@ -2,16 +2,31 @@
 import useMovieState from '@/store/useMovieState'
 import useUserState from '@/store/useUserState'
 
-const { state: movieState, addMovie, getNumberOfMovies } = useMovieState()
+const {
+    state: movieState,
+    addMovie,
+    getLastMovieTitle,
+    removeMovie,
+} = useMovieState()
 
 const { getIsLoggedIn } = useUserState()
 const isUserLoggedIn = getIsLoggedIn()
 
 const onAddMovieClick = () => {
+    let lastMovieId = getLastMovieTitle().value?.title.split(' ')[1]
+
+    if (!lastMovieId) {
+        lastMovieId = '0'
+    }
+
     addMovie({
-        id: getNumberOfMovies().value + 1,
-        title: `Movie ${getNumberOfMovies().value + 1}`,
+        id: parseInt(lastMovieId) + 1,
+        title: `Movie ${parseInt(lastMovieId) + 1}`,
     })
+}
+
+const removeMovieOnClick = (movieId) => {
+    removeMovie(movieId)
 }
 </script>
 
@@ -26,7 +41,9 @@ const onAddMovieClick = () => {
                     {{ movie.title }}
                     <button
                         type="submit"
-                        class="delBtn"
+                        class="btnDelete"
+                        @click="removeMovieOnClick(movie.id)"
+                        v-if="isUserLoggedIn"
                     >
                         x
                     </button>
@@ -68,7 +85,7 @@ ul {
     align-items: center;
     gap: 1rem;
 }
-.delBtn {
+.btnDelete {
     padding: 2px 8px;
     cursor: pointer;
 }
