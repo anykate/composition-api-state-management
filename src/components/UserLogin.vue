@@ -87,7 +87,7 @@ const onSubmitForm = () => {
                 class="btnSubmit"
                 :disabled="loadingState"
             >
-                {{ loadingState ? 'Loading...' : 'Submit' }}
+                {{ loadingState ? 'Loading...' : 'Login' }}
             </button>
         </form>
     </div>
