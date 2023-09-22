@@ -18,6 +18,14 @@ const isLoggedIn = getIsLoggedIn()
         <h1>
             State Management using Vue3 Composition API (without VueX / Pinia)
         </h1>
+        <h3>
+            Reference:
+            <a
+                href="https://www.youtube.com/watch?v=1wmtI4Qo-rw"
+                target="_blank"
+                >YouTube</a
+            >
+        </h3>
         <user-login v-if="!isLoggedIn" />
         <user-profile v-else />
         <movie-list />
