@@ -27,6 +27,7 @@ const onSubmitForm = () => {
     userForm.password = ''
 }
 </script>
+
 <template>
     <div>
         <form
@@ -91,6 +92,7 @@ const onSubmitForm = () => {
         </form>
     </div>
 </template>
+
 <style scoped>
 #myForm {
     display: flex;
