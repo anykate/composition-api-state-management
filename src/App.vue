@@ -23,8 +23,9 @@ const isLoggedIn = getIsLoggedIn()
             <a
                 href="https://www.youtube.com/watch?v=1wmtI4Qo-rw"
                 target="_blank"
-                >YouTube</a
             >
+                YouTube
+            </a>
         </h3>
         <user-login v-if="!isLoggedIn" />
         <user-profile v-else />
