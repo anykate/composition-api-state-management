@@ -72,6 +72,7 @@ ul {
     margin: 15px 0;
     width: fit-content;
     padding: 8px;
+    cursor: pointer;
 }
 .movies {
     display: flex;
